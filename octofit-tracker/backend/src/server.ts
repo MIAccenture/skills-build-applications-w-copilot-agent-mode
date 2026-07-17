@@ -43,6 +43,7 @@ const getApiBaseUrl = () => {
     return process.env.API_URL;
   }
 
+  
   if (process.env.CODESPACE_NAME) {
     return `https://${process.env.CODESPACE_NAME}-8000.app.github.dev`;
   }
