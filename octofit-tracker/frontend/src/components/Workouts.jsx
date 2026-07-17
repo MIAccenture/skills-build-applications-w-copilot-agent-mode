@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
-const WORKOUTS_ENDPOINT = '/api/workouts/';
+const WORKOUTS_ENDPOINT = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : '/api/workouts/';
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState([]);

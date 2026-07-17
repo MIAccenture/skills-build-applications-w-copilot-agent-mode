@@ -18,14 +18,17 @@ export function normalizeApiResponse(payload) {
 
 export function getApiUrl(path) {
   const rawPath = String(path || '').trim();
-  const trimmedPath = rawPath.replace(/^\/+|\/+$|\s+/g, '');
-
-  if (!trimmedPath) {
+  if (!rawPath) {
     throw new Error('API path must not be empty');
   }
 
-  if (rawPath.startsWith('/api/')) {
-    return `${API_HOST}/${trimmedPath}/`;
+  if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
+    return rawPath;
+  }
+
+  const trimmedPath = rawPath.replace(/^\/+|\/+$/g, '');
+  if (!trimmedPath) {
+    throw new Error('API path must not be empty');
   }
 
   return `${API_BASE_URL}/${trimmedPath}/`;

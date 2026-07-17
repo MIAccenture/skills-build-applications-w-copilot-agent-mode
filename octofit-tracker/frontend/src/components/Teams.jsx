@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
-const TEAMS_ENDPOINT = '/api/teams/';
+const TEAMS_ENDPOINT = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : '/api/teams/';
 
 export default function Teams() {
   const [teams, setTeams] = useState([]);
