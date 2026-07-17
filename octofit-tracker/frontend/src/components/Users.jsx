@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
+const USERS_ENDPOINT = '/api/users/';
+
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchApiList('users')
+    fetchApiList(USERS_ENDPOINT)
       .then(setUsers)
       .catch(() => setError('Unable to load users.'))
       .finally(() => setLoading(false));

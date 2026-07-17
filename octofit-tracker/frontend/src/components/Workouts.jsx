@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
+const WORKOUTS_ENDPOINT = '/api/workouts/';
+
 export default function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchApiList('workouts')
+    fetchApiList(WORKOUTS_ENDPOINT)
       .then(setWorkouts)
       .catch(() => setError('Unable to load workouts.'))
       .finally(() => setLoading(false));

@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
+const ACTIVITIES_ENDPOINT = '/api/activities/';
+
 export default function Activities() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchApiList('activities')
+    fetchApiList(ACTIVITIES_ENDPOINT)
       .then(setActivities)
       .catch(() => setError('Unable to load activities.'))
       .finally(() => setLoading(false));

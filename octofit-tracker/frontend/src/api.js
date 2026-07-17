@@ -16,8 +16,24 @@ export function normalizeApiResponse(payload) {
   return [];
 }
 
+export function getApiUrl(path) {
+  const rawPath = String(path || '').trim();
+  const trimmedPath = rawPath.replace(/^\/+|\/+$|\s+/g, '');
+
+  if (!trimmedPath) {
+    throw new Error('API path must not be empty');
+  }
+
+  if (rawPath.startsWith('/api/')) {
+    return `${API_HOST}/${trimmedPath}/`;
+  }
+
+  return `${API_BASE_URL}/${trimmedPath}/`;
+}
+
 export async function fetchApiList(path) {
-  const response = await fetch(`${API_BASE_URL}/${path}/`);
+  const url = getApiUrl(path);
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`API request failed: ${response.status}`);
   }

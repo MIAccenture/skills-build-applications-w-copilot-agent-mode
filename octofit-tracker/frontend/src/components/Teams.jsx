@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
+const TEAMS_ENDPOINT = '/api/teams/';
+
 export default function Teams() {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchApiList('teams')
+    fetchApiList(TEAMS_ENDPOINT)
       .then(setTeams)
       .catch(() => setError('Unable to load teams.'))
       .finally(() => setLoading(false));

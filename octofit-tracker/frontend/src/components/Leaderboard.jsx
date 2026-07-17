@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchApiList } from '../api';
 
+const LEADERBOARD_ENDPOINT = '/api/leaderboard/';
+
 export default function Leaderboard() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchApiList('leaderboard')
+    fetchApiList(LEADERBOARD_ENDPOINT)
       .then(setItems)
       .catch(() => setError('Unable to load leaderboard.'))
       .finally(() => setLoading(false));
